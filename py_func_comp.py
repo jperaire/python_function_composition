@@ -5,10 +5,12 @@ class Function(object):
     def __init__(self, func, funcList=None):
         if not callable(func):
             raise TypeError("{0} object is not callable".format(str(type(func))))
+            
         if funcList is None:
             self.funcList = []
         else:
             self.funcList = funcList[:]
+            
         if hasattr(func, "funcList"):
             self.funcList += func.funcList
         else:
@@ -25,6 +27,7 @@ class Function(object):
                 raise TypeError("Inputs of function {0} did not \
                                 match outputs of other: \
                                 {1}".format(f.__name__, e.message))
+        
         return val
 
     def __mul__(self, obj):
@@ -36,8 +39,10 @@ class Function(object):
     def __rmul__(self, obj):
         return Function(obj) * self
 
+
 def composable(myFunc):
     return Function(myFunc)
+    
     
 if __name__ == "__main__":
     @composable
