@@ -1,1 +1,3 @@
 # python_function_composition
+
+Pointless - style function composition
