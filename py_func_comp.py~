@@ -5,6 +5,8 @@ class Function(object):
     def __init__(self, func, funcList=None):
         if not callable(func):
             raise TypeError("{0} object is not callable".format(str(type(func))))
+        #self.__doc__ = func.__doc__
+        #self.__class__ = func.__class__
         if funcList is None:
             self.funcList = []
         else:
