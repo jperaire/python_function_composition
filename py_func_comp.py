@@ -2,22 +2,22 @@ class Function(object):
 
     """ Used for pointless-style function composition """
 
-    def __init__(self, func, funcList=None):
+    def __init__(self, func, func_list=None):
         if not callable(func):
             raise TypeError("{0} object is not callable".format(str(type(func))))
             
-        if funcList is None:
-            self.funcList = []
+        if func_list is None:
+            self.func_list = []
         else:
-            self.funcList = funcList[:]
+            self.func_list = func_list[:]
             
-        if hasattr(func, "funcList"):
-            self.funcList += func.funcList
+        if hasattr(func, "func_list"):
+            self.func_list += func.func_list
         else:
-            self.funcList.append(func)
+            self.func_list.append(func)
 
     def __call__(self, *args, **kwargs):
-        f_list = self.funcList[:]
+        f_list = self.func_list[:]
         val = f_list.pop()(*args, **kwargs)
         while f_list:
             f = f_list.pop()
@@ -32,7 +32,7 @@ class Function(object):
 
     def __mul__(self, obj):
         if callable(obj):
-            return Function(obj, funcList = self.funcList)
+            return Function(obj, func_list = self.func_list)
         else:
             raise TypeError("{0} object is not callable".format(str(type(obj))))
 
